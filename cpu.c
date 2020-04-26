@@ -25,6 +25,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stddef.h>
 
 #include "util.h"
 
@@ -99,8 +100,8 @@ u32 LastPoll;
 PinFunction PinCallback[PIN_COUNT];
 
 COMPILE_ASSERT(sizeof(Data.SREG) == 1);
-//COMPILE_ASSERT(((u8 *)&Data.SP) - Data._Bytes == 0x5d);
-//COMPILE_ASSERT(((u8 *)&Data.SREG) - Data._Bytes == 0x5f);
+COMPILE_ASSERT(offsetof(TData, SP) - offsetof(TData, _Bytes) == 0x5d);
+COMPILE_ASSERT(offsetof(TData, SREG) - offsetof(TData, _Bytes) == 0x5f);
 
 static u8 read(u16 addr)
 {
